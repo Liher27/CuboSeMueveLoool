@@ -10,16 +10,16 @@ import javax.swing.JPanel;
 import entity.Player;
 import keyBoard.KeyBoard;
 
+/**
+ * Clase en la que se crea el panel
+ */
 public class GamePanel extends JPanel implements Runnable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private KeyBoard keyBoard = new KeyBoard();
 	private Thread gameThread; // Hilo sobre el cual se correra el juego
-	Player player = new Player(this, keyBoard);
+	private Player player = new Player(keyBoard);
 
 	// definir un sprite de 16x16 bloques
 	private final int originalTileSize = 16;
@@ -38,6 +38,9 @@ public class GamePanel extends JPanel implements Runnable {
 	// Para delimitar el ratio de refresco de la pantalla
 	private final int FPS = 60;
 
+	/**
+	 * Constructor de la clase GamePanel
+	 */
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.white);
@@ -48,17 +51,21 @@ public class GamePanel extends JPanel implements Runnable {
 		startGameThread();
 	}
 
+	/**
+	 * Crea el hilo y se inicia
+	 */
 	private void startGameThread() {
-		// instanciar el hilo para despues iniciarlo
+		// instanciar el hilo
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
+	/**
+	 * Metodo que implementa "Runnable", para iniciar el hilo
+	 */
 	@Override
 	public void run() {
 
-		double drawInterval = 1000000000 / FPS;
-		double nextDrawTime = System.nanoTime() + drawInterval;
 		while (gameThread != null) {
 
 			// Aquí se ejecutará el bucle principal sobre el que el juego se inicia,
@@ -68,42 +75,53 @@ public class GamePanel extends JPanel implements Runnable {
 			// recogida.
 
 			update();
-
 			repaint();
-			try {
-				double remainingTime = nextDrawTime - System.nanoTime();
-				remainingTime = remainingTime / 1000000;
 
-				if (remainingTime < 0) {
-					remainingTime = 0;
-				}
+			refrescoPantalla();
+		}
+	}
 
-				Thread.sleep((long) remainingTime);
+	/**
+	 * Para limitar cada cuanto tiempo se refresca la pantalla (60FPS) , sino se
+	 * refrescaria millones de veces por segundo
+	 */
+	private void refrescoPantalla() {
+		double drawInterval = 1000000000 / FPS;
+		double nextDrawTime = System.nanoTime() + drawInterval;
 
-				nextDrawTime = nextDrawTime + drawInterval;
+		try {
+			double remainingTime = nextDrawTime - System.nanoTime();
+			remainingTime = remainingTime / 1000000;
 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if (remainingTime < 0) {
+				remainingTime = 0;
 			}
 
+			Thread.sleep((long) remainingTime);
+			nextDrawTime = nextDrawTime + drawInterval;
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-
 	}
 
+	/**
+	 * Metodo usado normalmente con los hilos para recoger la nueva informacion que
+	 * se le pase por teclado
+	 */
 	private void update() {
-
-		player.update();
+		player.updateSprite();
 	}
 
+	/**
+	 * Al igual que update, se usa mucho con los hilos y se utiliza para pintar por
+	 * pantalla la informacion conseguida en el anterior metodo
+	 */
 	public void paintComponent(Graphics graphics) {
-
 		super.paintComponent(graphics);
 
-		// para mejorar las funciones del Graphics.
 		Graphics2D graphics2D = (Graphics2D) graphics;
-
 		player.draw(graphics2D, tileSize);
-
 		graphics2D.dispose();
 	}
 }
