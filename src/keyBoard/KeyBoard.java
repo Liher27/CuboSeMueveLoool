@@ -10,7 +10,6 @@ public class KeyBoard implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// no lo usaremos
-
 	}
 
 	@Override

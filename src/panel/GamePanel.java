@@ -11,34 +11,36 @@ import keyBoard.KeyBoard;
 
 public class GamePanel extends JPanel implements Runnable {
 
-	KeyBoard keyBoard = new KeyBoard();
+	
 
 	// definir un sprite de 16x16 bloques
-	final int originalTileSize = 16;
+	private final int originalTileSize = 16;
 
 	// tamaño de escalada para los bloques de sprites, ya que un sprite de 16x16
 	// se vería demasiado pequeño en las pantallas de 1920x1080
-	final int scale = 3;
-	final int tileSize = originalTileSize * scale;// tamaño escalado
+	private final int scale = 3;
+	private final int tileSize = originalTileSize * scale;// tamaño escalado
 
 	// Resolución de la pantalla, 4:3 en este caso.
-	final int maxScreenCol = 16;
-	final int maxScreenRow = 12;
-	final int screenWidth = tileSize * maxScreenCol; // Para que los 16 bloques ocupen en total 760 pixeles
-	final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
+	private final int maxScreenCol = 16;
+	private final int maxScreenRow = 12;
+	private final int screenWidth = tileSize * maxScreenCol; // Para que los 16 bloques ocupen en total 760 pixeles
+	private final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
 
-	Thread gameThread = null; // Hilo sobre el cual se correra el juego
+	
+	private KeyBoard keyBoard = new KeyBoard();
+	private Thread gameThread; // Hilo sobre el cual se correra el juego
 
 	// posicion inicial del jugador
-	int playerXPosition = 100;
-	int playerYPosition = 100;
+	private int playerXPosition = 100;
+	private int playerYPosition = 100;
 
 	// cantidad de pixeles que se movera el jugador por cada vez que la tecla se
 	// pulse
-	int playerSpeed = 4;
+	private int playerSpeed = 4;
 
 	// Para delimitar el ratio de refresco de la pantalla
-	final int FPS = 60;
+	private final int FPS = 60;
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -46,9 +48,11 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true); // opcional, es para un mejor renderizado de los graficos del panel
 		this.addKeyListener(keyBoard);
 		this.setFocusable(true);
+		this.requestFocusInWindow();
+		startGameThread();
 	}
 
-	public void startGameThread() {
+	private void startGameThread() {
 		// instanciar el hilo para despues iniciarlo
 		gameThread = new Thread(this);
 		gameThread.start();
@@ -57,11 +61,10 @@ public class GamePanel extends JPanel implements Runnable {
 	@Override
 	public void run() {
 
-		double drawInterval = 1000000000/FPS;
-		long currentTime = System.nanoTime();
-		
+		double drawInterval = 1000000000 / FPS;
+		double nextDrawTime = System.nanoTime() + drawInterval;
 		while (gameThread != null) {
-			
+
 			// Aquí se ejecutará el bucle principal sobre el que el juego se inicia,
 			// mecanica basica sobre la cual funcionan muchos juegos.
 
@@ -72,25 +75,43 @@ public class GamePanel extends JPanel implements Runnable {
 
 			repaint();
 
+			
+
+			try {
+				double remainingTime = nextDrawTime - System.nanoTime();
+				remainingTime = remainingTime/1000000;
+				
+				if (remainingTime < 0) {
+					remainingTime = 0;
+				}
+				
+				Thread.sleep((long) remainingTime);
+		
+				nextDrawTime = nextDrawTime + drawInterval;
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
 
-	public void update() {
-		if (keyBoard.upPressed) {
-			playerYPosition = playerYPosition - playerSpeed;
+	private void update() {
+		if (keyBoard.upPressed == true) {
+			playerYPosition -= playerSpeed;
 		}
-		
-		if (keyBoard.downPressed) {
-			playerYPosition = playerYPosition + playerSpeed;
+
+		if (keyBoard.downPressed == true) {
+			playerYPosition += playerSpeed;
 		}
-		
-		if (keyBoard.rightPressed) {
-			playerXPosition = playerXPosition + playerSpeed;
+
+		if (keyBoard.rightPressed == true) {
+			playerXPosition += playerSpeed;
 		}
-		
-		if (keyBoard.leftPressed) {
-			playerXPosition = playerXPosition - playerSpeed;
+
+		if (keyBoard.leftPressed == true) {
+			playerXPosition -= playerSpeed;
 		}
 
 	}
