@@ -7,11 +7,19 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
 import keyBoard.KeyBoard;
 
 public class GamePanel extends JPanel implements Runnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
+	private KeyBoard keyBoard = new KeyBoard();
+	private Thread gameThread; // Hilo sobre el cual se correra el juego
+	Player player = new Player(this, keyBoard);
 
 	// definir un sprite de 16x16 bloques
 	private final int originalTileSize = 16;
@@ -26,18 +34,6 @@ public class GamePanel extends JPanel implements Runnable {
 	private final int maxScreenRow = 12;
 	private final int screenWidth = tileSize * maxScreenCol; // Para que los 16 bloques ocupen en total 760 pixeles
 	private final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
-
-	
-	private KeyBoard keyBoard = new KeyBoard();
-	private Thread gameThread; // Hilo sobre el cual se correra el juego
-
-	// posicion inicial del jugador
-	private int playerXPosition = 100;
-	private int playerYPosition = 100;
-
-	// cantidad de pixeles que se movera el jugador por cada vez que la tecla se
-	// pulse
-	private int playerSpeed = 4;
 
 	// Para delimitar el ratio de refresco de la pantalla
 	private final int FPS = 60;
@@ -74,21 +70,18 @@ public class GamePanel extends JPanel implements Runnable {
 			update();
 
 			repaint();
-
-			
-
 			try {
 				double remainingTime = nextDrawTime - System.nanoTime();
-				remainingTime = remainingTime/1000000;
-				
+				remainingTime = remainingTime / 1000000;
+
 				if (remainingTime < 0) {
 					remainingTime = 0;
 				}
-				
+
 				Thread.sleep((long) remainingTime);
-		
+
 				nextDrawTime = nextDrawTime + drawInterval;
-				
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -98,34 +91,18 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 
 	private void update() {
-		if (keyBoard.upPressed == true) {
-			playerYPosition -= playerSpeed;
-		}
 
-		if (keyBoard.downPressed == true) {
-			playerYPosition += playerSpeed;
-		}
-
-		if (keyBoard.rightPressed == true) {
-			playerXPosition += playerSpeed;
-		}
-
-		if (keyBoard.leftPressed == true) {
-			playerXPosition -= playerSpeed;
-		}
-
+		player.update();
 	}
 
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics graphics) {
 
-		super.paintComponent(g);
+		super.paintComponent(graphics);
 
 		// para mejorar las funciones del Graphics.
-		Graphics2D graphics2D = (Graphics2D) g;
+		Graphics2D graphics2D = (Graphics2D) graphics;
 
-		graphics2D.setColor(Color.white);
-
-		graphics2D.fillRect(playerXPosition, playerYPosition, tileSize, tileSize);
+		player.draw(graphics2D, tileSize);
 
 		graphics2D.dispose();
 	}

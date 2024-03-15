@@ -4,8 +4,12 @@ import javax.swing.JFrame;
 import panel.GamePanel;
 
 public class MainWindow extends JFrame{
-
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainWindow() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
@@ -16,10 +20,7 @@ public class MainWindow extends JFrame{
 		
 		pack();
 		
-		
 		setLocationRelativeTo(null);
 	}
-
-	
 	
 }
