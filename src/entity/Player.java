@@ -75,10 +75,18 @@ public class Player extends Character {
 
 		spriteCounter++;
 
+		warpForSpriteMovement();
+
+	}
+
+	private void warpForSpriteMovement() {
+
 		if (spriteCounter > 10) {
 			if (spriteChanger == 1) {
 				spriteChanger = 2;
 			} else if (spriteChanger == 2) {
+				spriteChanger = 3;
+			} else if (spriteChanger == 3) {
 				spriteChanger = 1;
 			}
 			spriteCounter = 0;
@@ -87,27 +95,29 @@ public class Player extends Character {
 	}
 
 	public void draw(Graphics2D graphics2D, int tileSize) {
-//		graphics2D.setColor(Color.white);
-//
-//		graphics2D.fillRect(x, y, tileSize, tileSize);
 
 		BufferedImage sprite = null;
 
 		switch (direction) {
 		case "up":
 			if (spriteChanger == 1) {
-				sprite = redMovesUp1;
+				sprite = redStillUp;
 			}
 			if (spriteChanger == 2) {
+				sprite = redMovesUp1;
+			}
+			if (spriteChanger == 3) {
 				sprite = redMovesUp2;
 			}
-
 			break;
 		case "down":
 			if (spriteChanger == 1) {
-				sprite = redMovesDown1;
+				sprite = redStill;
 			}
 			if (spriteChanger == 2) {
+				sprite = redMovesDown1;
+			}
+			if (spriteChanger == 3) {
 				sprite = redMovesDown2;
 			}
 			break;
@@ -118,6 +128,9 @@ public class Player extends Character {
 			if (spriteChanger == 2) {
 				sprite = redMovesLeft;
 			}
+			if (spriteChanger == 3) {
+				sprite = redMovesLeft;
+			}
 			break;
 		case "right":
 			if (spriteChanger == 1) {
@@ -126,10 +139,12 @@ public class Player extends Character {
 			if (spriteChanger == 2) {
 				sprite = redMovesRight;
 			}
+			if (spriteChanger == 3) {
+				sprite = redMovesRight;
+			}
 			break;
 
 		}
 		graphics2D.drawImage(sprite, x, y, tileSize, tileSize, null);
 	}
-
 }
