@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,32 +7,34 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import keyBoard.KeyBoard;
-import panel.GamePanel;
 
+/**
+ * Pojo especifico creado para el personaje del jugador (no deberia haber tanto codigo aqui)
+ */
 public class Player extends Character {
 
-	GamePanel gp = null;
-	KeyBoard keyBoard = null;
+	private KeyBoard keyBoard = null;
 
-	public Player(GamePanel gp, KeyBoard keyBoard) {
-		this.gp = gp;
+	/**
+	 * Constructor de la clase
+	 * @param keyBoard
+	 */
+	public Player(KeyBoard keyBoard) {
 		this.keyBoard = keyBoard;
 
-		setDefaultValues();
-		getPlayerImage();
-	}
-
-	private void setDefaultValues() {
 		x = 100;
 		y = 100;
 		speed = 4;
 		direction = "down";
+		
+		getPlayerImage();
 	}
 
+	/**
+	 * Para obtener las imagenes de los sprites del personaje
+	 */
 	public void getPlayerImage() {
-
 		try {
-
 			redStill = ImageIO.read(getClass().getResourceAsStream("/player/redStill.png"));
 			redMovesDown1 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves1.png"));
 			redMovesDown2 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves2.png"));
@@ -44,14 +45,15 @@ public class Player extends Character {
 			redStillUp = ImageIO.read(getClass().getResourceAsStream("/player/redStillUp.png"));
 			redMovesUp1 = ImageIO.read(getClass().getResourceAsStream("/player/redMovesUp1.png"));
 			redMovesUp2 = ImageIO.read(getClass().getResourceAsStream("/player/redMovesUp2.png"));
-
 		} catch (IOException e) {
-			e.printStackTrace();
+			// No puede ocurrir...
 		}
-
 	}
 
-	public void update() {
+	/**
+	 * Para hacer que el player se mueva en una direccion u otra
+	 */
+	public void updateSprite() {
 
 		if (keyBoard.upPressed == true) {
 			direction = "up";
@@ -79,6 +81,9 @@ public class Player extends Character {
 
 	}
 
+	/**
+	 * para ir cambiando el sprite del personaje: Changer=1, una imagen. Changer=2, otra ...
+	 */
 	private void warpForSpriteMovement() {
 
 		if (spriteCounter > 10) {
@@ -93,7 +98,12 @@ public class Player extends Character {
 		}
 
 	}
-
+	
+	/**
+	 * Para dibujar el player e ir cambiando sus sprites por cada ciclo del anterior metodo
+	 * @param graphics2D
+	 * @param tileSize
+	 */
 	public void draw(Graphics2D graphics2D, int tileSize) {
 
 		BufferedImage sprite = null;
