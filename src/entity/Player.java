@@ -35,7 +35,7 @@ public class Player extends Character {
 	 */
 	public void getPlayerImage() {
 		try {
-			redStill = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redStill.png"));
+			redStill = ImageIO.read(getClass().getResourceAsStream("/player/redStill.png"));
 			redMovesDown1 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves1.png"));
 			redMovesDown2 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves2.png"));
 			redStillLeft = ImageIO.read(getClass().getResourceAsStream("/player/redStillLeft.png"));
@@ -139,7 +139,7 @@ public class Player extends Character {
 				sprite = redMovesLeft;
 			}
 			if (spriteChanger == 3) {
-				sprite = redStillLeft;
+				sprite = redMovesLeft;
 			}
 			break;
 		case "right":
@@ -150,7 +150,7 @@ public class Player extends Character {
 				sprite = redMovesRight;
 			}
 			if (spriteChanger == 3) {
-				sprite = redStillRight;
+				sprite = redMovesRight;
 			}
 			break;
 
