@@ -1,4 +1,4 @@
-package panel;
+package main.panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,8 +7,9 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entity.Player;
-import keyBoard.KeyBoard;
+import main.entity.Player;
+import main.keyBoard.KeyBoard;
+import main.tile.TileManager;
 
 /**
  * Clase en la que se crea el panel
@@ -17,9 +18,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private KeyBoard keyBoard = new KeyBoard();
-	private Thread gameThread; // Hilo sobre el cual se correra el juego
-	private Player player = new Player(keyBoard);
+	private KeyBoard keyBoard = null;
+	private Thread gameThread = null; // Hilo sobre el cual se correra el juego
+	private Player player = null;
+	private TileManager tileManager = null;
 
 	// definir un sprite de 16x16 bloques
 	private final int originalTileSize = 16;
@@ -42,6 +44,10 @@ public class GamePanel extends JPanel implements Runnable {
 	 * Constructor de la clase GamePanel
 	 */
 	public GamePanel() {
+		keyBoard = new KeyBoard();
+		player = new Player(keyBoard);
+		tileManager = new TileManager(this);
+
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.white);
 		this.setDoubleBuffered(true); // opcional, es para un mejor renderizado de los graficos del panel
@@ -122,6 +128,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 		Graphics2D graphics2D = (Graphics2D) graphics;
 		player.draw(graphics2D, tileSize);
+		tileManager.drawTiles(graphics2D, tileSize);
 		graphics2D.dispose();
 	}
 }

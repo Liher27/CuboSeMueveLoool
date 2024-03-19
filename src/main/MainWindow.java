@@ -1,7 +1,7 @@
 package main;
 
 import javax.swing.JFrame;
-import panel.GamePanel;
+import main.panel.GamePanel;
 
 /**
  * Clase para crear el frame y añadirle el Panel
