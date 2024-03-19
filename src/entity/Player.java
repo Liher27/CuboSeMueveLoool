@@ -139,7 +139,7 @@ public class Player extends Character {
 				sprite = redMovesLeft;
 			}
 			if (spriteChanger == 3) {
-				sprite = redMovesLeft;
+				sprite = redStillLeft;
 			}
 			break;
 		case "right":
@@ -150,7 +150,7 @@ public class Player extends Character {
 				sprite = redMovesRight;
 			}
 			if (spriteChanger == 3) {
-				sprite = redMovesRight;
+				sprite = redStillRight;
 			}
 			break;
 
