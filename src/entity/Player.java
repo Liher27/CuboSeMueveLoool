@@ -35,7 +35,7 @@ public class Player extends Character {
 	 */
 	public void getPlayerImage() {
 		try {
-			redStill = ImageIO.read(getClass().getResourceAsStream("/player/redStill.png"));
+			redStill = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redStill.png"));
 			redMovesDown1 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves1.png"));
 			redMovesDown2 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves2.png"));
 			redStillLeft = ImageIO.read(getClass().getResourceAsStream("/player/redStillLeft.png"));
