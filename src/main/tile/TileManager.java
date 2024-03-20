@@ -13,28 +13,24 @@ import main.panel.GamePanel;
 public class TileManager {
 
 	Tile[] tile = null;
-
 	GamePanel gamePanel = null;
-
 	int mapCoords[][] = null;
 
-	
 	/**
 	 * constructor de la clase
+	 * 
 	 * @param gamePanel
 	 */
 	public TileManager(GamePanel gamePanel) {
 
 		this.gamePanel = gamePanel;
-
 		tile = new Tile[10];
-		mapCoords = new int[gamePanel.maxScreenColumn][gamePanel.maxScreenRow];
+		mapCoords = new int[gamePanel.maxWorldColumn][gamePanel.maxWorldRow];
 
 		getTileImage();
 		loadMap();
 	}
 
-	
 	/**
 	 * metodo para guardar las imagenes dentro del array de tipo tile.
 	 */
@@ -83,18 +79,16 @@ public class TileManager {
 			InputStream inputStream = getClass().getResourceAsStream("/map/map.txt");
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-			for (int row = 0; row < gamePanel.maxScreenRow; row++) {
+			for (int row = 0; row < gamePanel.maxWorldRow; row++) {
 				String mapCoord = bufferedReader.readLine();
 				String[] mapInfo = mapCoord.split(" ");
 
-				for (int column = 0; column < gamePanel.maxScreenColumn; column++) {
+				for (int column = 0; column < gamePanel.maxWorldColumn; column++) {
 					int mapNumber = Integer.parseInt(mapInfo[column]);
 					mapCoords[column][row] = mapNumber;
 				}
 			}
-
 			bufferedReader.close();
-
 		} catch (Exception e) {
 
 		}
@@ -108,20 +102,26 @@ public class TileManager {
 	 * @param graphics2D
 	 * @param tileSize
 	 */
-	public void drawTiles(Graphics2D graphics2D, int tileSize) {
+	public void drawTiles(Graphics2D graphics2D) {
 
-		int x = 0;
-		int y = 0;
-		for (int row = 0; row < gamePanel.maxScreenRow; row++) {
-			for (int colomun = 0; colomun < gamePanel.maxScreenColumn; colomun++) {
-				int tileImageIndex = mapCoords[colomun][row];
-				graphics2D.drawImage(tile[tileImageIndex].tileImage, x, y, tileSize, tileSize, null);
-				x += gamePanel.tileSize;
+		int worldRow = 0;
+		int worldColumn = 0;
+
+		for (worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
+			for (worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
+
+				int worldX = worldColumn * gamePanel.tileSize;
+				int worldY = worldRow * gamePanel.tileSize;
+				int screenX = worldX - (gamePanel.player.characterWorldX * gamePanel.player.playerPositionXInPanel);
+				int screenY = worldY - (gamePanel.player.characterWorldY * gamePanel.player.playerPositionYInPanel);
+
+				int tileImageIndex = mapCoords[worldColumn][worldRow];
+				graphics2D.drawImage(tile[tileImageIndex].tileImage, screenX, screenY, gamePanel.tileSize,
+						gamePanel.tileSize, null);
+
 			}
-			x = 0;
-			y += gamePanel.tileSize;
+			worldColumn = 0;
 		}
-
 	}
 
 }

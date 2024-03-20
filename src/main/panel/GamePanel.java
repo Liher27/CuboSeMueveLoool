@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	private KeyBoard keyBoard = null;
 	private Thread gameThread = null; // Hilo sobre el cual se correra el juego
-	private Player player = null;
+	public Player player = null;
 	private TileManager tileManager = null;
 
 	// definir un sprite de 16x16 bloques
@@ -36,9 +36,15 @@ public class GamePanel extends JPanel implements Runnable {
 	// Resolución de la pantalla, 4:3 en este caso.
 	public final int maxScreenColumn = 16;
 	public final int maxScreenRow = 12;
-	private final int screenWidth = tileSize * maxScreenColumn; // Para que los 16 bloques ocupen en total 760 pixeles
-	private final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
+	public final int screenWidth = tileSize * maxScreenColumn; // Para que los 16 bloques ocupen en total 760 pixeles
+	public final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
+	
+	public final int maxWorldColumn = 48;
+	public final int maxWorldRow = 48;
+	public final int worldScreenWidth = tileSize * maxWorldColumn; 
+	public final int worldScreenHeight = tileSize * maxWorldRow; 
 
+	
 	// Para delimitar el ratio de refresco de la pantalla
 	private final int FPS = 60;
 
@@ -47,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public GamePanel() {
 		keyBoard = new KeyBoard();
-		player = new Player(keyBoard);
+		player = new Player(keyBoard, this);
 		tileManager = new TileManager(this);
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -129,8 +135,8 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(graphics);
 
 		Graphics2D graphics2D = (Graphics2D) graphics;
-		tileManager.drawTiles(graphics2D, tileSize);
-		player.draw(graphics2D, tileSize);
+		tileManager.drawTiles(graphics2D);
+		player.draw(graphics2D);
 		graphics2D.dispose();
 	}
 }

@@ -7,26 +7,40 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.keyBoard.KeyBoard;
+import main.panel.GamePanel;
 
 /**
- * Pojo especifico creado para el personaje del jugador (no deberia haber tanto codigo aqui)
+ * Pojo especifico creado para el personaje del jugador (no deberia haber tanto
+ * codigo aqui)
  */
 public class Player extends Character {
 
 	private KeyBoard keyBoard = null;
 
+	private GamePanel gamePanel = null;
+
+	public final int playerPositionXInPanel;
+	public final int playerPositionYInPanel;
+
 	/**
 	 * Constructor de la clase
+	 * 
 	 * @param keyBoard
 	 */
-	public Player(KeyBoard keyBoard) {
+	public Player(KeyBoard keyBoard, GamePanel gamePanel) {
 		this.keyBoard = keyBoard;
+		
+		this.gamePanel = gamePanel;
 
-		x = 100;
-		y = 100;
+		characterWorldX = gamePanel.tileSize * 10;
+		characterWorldY = gamePanel.tileSize * 8;
+
+		playerPositionXInPanel = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2;
+		playerPositionYInPanel = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
+
 		speed = 4;
 		direction = "down";
-		
+
 		getPlayerImage();
 	}
 
@@ -57,22 +71,22 @@ public class Player extends Character {
 
 		if (keyBoard.upPressed == true) {
 			direction = "up";
-			y -= speed;
+			characterWorldY -= speed;
 		}
 
 		if (keyBoard.downPressed == true) {
 			direction = "down";
-			y += speed;
+			characterWorldY += speed;
 		}
 
 		if (keyBoard.rightPressed == true) {
 			direction = "right";
-			x += speed;
+			characterWorldX += speed;
 		}
 
 		if (keyBoard.leftPressed == true) {
 			direction = "left";
-			x -= speed;
+			characterWorldX -= speed;
 		}
 
 		spriteCounter++;
@@ -82,7 +96,8 @@ public class Player extends Character {
 	}
 
 	/**
-	 * para ir cambiando el sprite del personaje: Changer=1, una imagen. Changer=2, otra ...
+	 * para ir cambiando el sprite del personaje: Changer=1, una imagen. Changer=2,
+	 * otra ...
 	 */
 	private void warpForSpriteMovement() {
 
@@ -98,13 +113,15 @@ public class Player extends Character {
 		}
 
 	}
-	
+
 	/**
-	 * Para dibujar el player e ir cambiando sus sprites por cada ciclo del anterior metodo
+	 * Para dibujar el player e ir cambiando sus sprites por cada ciclo del anterior
+	 * metodo
+	 * 
 	 * @param graphics2D
 	 * @param tileSize
 	 */
-	public void draw(Graphics2D graphics2D, int tileSize) {
+	public void draw(Graphics2D graphics2D) {
 
 		BufferedImage sprite = null;
 
@@ -155,6 +172,7 @@ public class Player extends Character {
 			break;
 
 		}
-		graphics2D.drawImage(sprite, x, y, tileSize, tileSize, null);
+		graphics2D.drawImage(sprite, playerPositionXInPanel, playerPositionYInPanel, gamePanel.tileSize,
+				gamePanel.tileSize, null);
 	}
 }

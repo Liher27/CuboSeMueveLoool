@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Character {
 
-	public int x = 0;
-	public int y = 0;
-
+	public int characterWorldX = 0;
+	public int characterWorldY = 0;
+	
 	public int speed = 0;
 
 	public BufferedImage redStill= null;
