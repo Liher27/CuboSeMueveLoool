@@ -1,6 +1,10 @@
 package main;
 
+import java.io.IOException;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import main.panel.GamePanel;
 
 /**
@@ -18,11 +22,19 @@ public class MainWindow extends JFrame{
 		setResizable(false);
 		setTitle("Rojo se mueve (Ayuda)");
 		
-		GamePanel gamePanel = new GamePanel();
-		add(gamePanel);
+		GamePanel gamePanel;
+		try {
+			gamePanel = new GamePanel();
+			
+			add(gamePanel);
+			
+			pack();
+			setLocationRelativeTo(null);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "No se han cargado los archivos correctamente", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 		
-		pack();
-		setLocationRelativeTo(null);
 	}
 	
 }

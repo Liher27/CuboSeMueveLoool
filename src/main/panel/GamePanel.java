@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -50,8 +51,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	/**
 	 * Constructor de la clase GamePanel
+	 * @throws IOException 
 	 */
-	public GamePanel() {
+	public GamePanel() throws IOException {
 		keyBoard = new KeyBoard();
 		player = new Player(keyBoard, this);
 		tileManager = new TileManager(this);
