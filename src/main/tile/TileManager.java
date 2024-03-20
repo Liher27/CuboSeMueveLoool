@@ -44,33 +44,6 @@ public class TileManager {
 
 			HashMap<Integer, BufferedImage> ret = new HashMap<Integer, BufferedImage>();
 
-//			tile[0] = new Tile();
-//			tile[0].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/border.png"));
-//
-//			tile[1] = new Tile();
-//			tile[1].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/flower.png"));
-//
-//			tile[2] = new Tile();
-//			tile[2].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/frame.png"));
-//
-//			tile[3] = new Tile();
-//			tile[3].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-//
-//			tile[4] = new Tile();
-//			tile[4].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/house.png"));
-//
-//			tile[5] = new Tile();
-//			tile[5].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-//
-//			tile[6] = new Tile();
-//			tile[6].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorder.png"));
-//
-//			tile[7] = new Tile();
-//			tile[7].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/whiteFloor.png"));
-//
-//			tile[8] = new Tile();
-//			tile[8].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/whiteWithGrass.png"));
-
 			ret.put(0, ImageIO.read(getClass().getResourceAsStream("/tiles/border.png")));
 			ret.put(1, ImageIO.read(getClass().getResourceAsStream("/tiles/flower.png")));
 			ret.put(2, ImageIO.read(getClass().getResourceAsStream("/tiles/frame.png")));
