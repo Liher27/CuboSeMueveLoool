@@ -18,6 +18,11 @@ public class TileManager {
 
 	int mapCoords[][] = null;
 
+	
+	/**
+	 * constructor de la clase
+	 * @param gamePanel
+	 */
 	public TileManager(GamePanel gamePanel) {
 
 		this.gamePanel = gamePanel;
@@ -29,6 +34,10 @@ public class TileManager {
 		loadMap();
 	}
 
+	
+	/**
+	 * metodo para guardar las imagenes dentro del array de tipo tile.
+	 */
 	private void getTileImage() {
 		try {
 			tile[0] = new Tile();
@@ -63,6 +72,11 @@ public class TileManager {
 		}
 	}
 
+	/**
+	 * Método usado para leer el fichero de texto del mapa, en el que cada numero es
+	 * un bloque del array tipo tile. lee columna a columna, y una vez llega al
+	 * final de la columna pasa a la siguiente fila...
+	 */
 	private void loadMap() {
 
 		try {
@@ -86,6 +100,14 @@ public class TileManager {
 		}
 	}
 
+	/**
+	 * metodo para dibujar los bloques en el mapa del fichero de texto, dependiendo
+	 * del valor asignado en el fichero se le otrga una imagen u otra del array de
+	 * tiles. continua igual que el anterior metodo
+	 * 
+	 * @param graphics2D
+	 * @param tileSize
+	 */
 	public void drawTiles(Graphics2D graphics2D, int tileSize) {
 
 		int x = 0;
