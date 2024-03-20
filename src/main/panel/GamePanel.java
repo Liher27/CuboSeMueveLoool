@@ -29,12 +29,14 @@ public class GamePanel extends JPanel implements Runnable {
 	// tamaño de escalada para los bloques de sprites, ya que un sprite de 16x16
 	// se vería demasiado pequeño en las pantallas de 1920x1080
 	private final int scale = 3;
-	private final int tileSize = originalTileSize * scale;// tamaño escalado
-
+	private final int hi_scale = 4;
+	public final int tileSize = originalTileSize * scale;// tamaño escalado
+	public final int highTileSize = originalTileSize * hi_scale;
+	
 	// Resolución de la pantalla, 4:3 en este caso.
-	private final int maxScreenCol = 16;
-	private final int maxScreenRow = 12;
-	private final int screenWidth = tileSize * maxScreenCol; // Para que los 16 bloques ocupen en total 760 pixeles
+	public final int maxScreenColumn = 16;
+	public final int maxScreenRow = 12;
+	private final int screenWidth = tileSize * maxScreenColumn; // Para que los 16 bloques ocupen en total 760 pixeles
 	private final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
 
 	// Para delimitar el ratio de refresco de la pantalla
@@ -127,8 +129,8 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(graphics);
 
 		Graphics2D graphics2D = (Graphics2D) graphics;
-		player.draw(graphics2D, tileSize);
 		tileManager.drawTiles(graphics2D, tileSize);
+		player.draw(graphics2D, tileSize);
 		graphics2D.dispose();
 	}
 }

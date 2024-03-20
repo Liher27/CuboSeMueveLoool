@@ -1,7 +1,10 @@
 package main.tile;
 
 import java.awt.Graphics2D;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
@@ -11,15 +14,19 @@ public class TileManager {
 
 	Tile[] tile = null;
 
-	GamePanel gamepanel = null;
+	GamePanel gamePanel = null;
+
+	int mapCoords[][] = null;
 
 	public TileManager(GamePanel gamePanel) {
 
-		this.gamepanel = gamePanel;
+		this.gamePanel = gamePanel;
 
-		tile = new Tile[9];
+		tile = new Tile[10];
+		mapCoords = new int[gamePanel.maxScreenColumn][gamePanel.maxScreenRow];
 
 		getTileImage();
+		loadMap();
 	}
 
 	private void getTileImage() {
@@ -50,14 +57,48 @@ public class TileManager {
 
 			tile[8] = new Tile();
 			tile[8].tileImage = ImageIO.read(getClass().getResourceAsStream("/tiles/whiteWithGrass.png"));
+
 		} catch (IOException e) {
 			// No puede ocurrir...
 		}
 	}
 
+	private void loadMap() {
+
+		try {
+			InputStream inputStream = getClass().getResourceAsStream("/map/map.txt");
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+			for (int row = 0; row < gamePanel.maxScreenRow; row++) {
+				String mapCoord = bufferedReader.readLine();
+				String[] mapInfo = mapCoord.split(" ");
+
+				for (int column = 0; column < gamePanel.maxScreenColumn; column++) {
+					int mapNumber = Integer.parseInt(mapInfo[column]);
+					mapCoords[column][row] = mapNumber;
+				}
+			}
+
+			bufferedReader.close();
+
+		} catch (Exception e) {
+
+		}
+	}
+
 	public void drawTiles(Graphics2D graphics2D, int tileSize) {
 
-		graphics2D.drawImage(tile[0].tileImage, 0, 0, tileSize, tileSize, null);
+		int x = 0;
+		int y = 0;
+		for (int row = 0; row < gamePanel.maxScreenRow; row++) {
+			for (int colomun = 0; colomun < gamePanel.maxScreenColumn; colomun++) {
+				int tileImageIndex = mapCoords[colomun][row];
+				graphics2D.drawImage(tile[tileImageIndex].tileImage, x, y, tileSize, tileSize, null);
+				x += gamePanel.tileSize;
+			}
+			x = 0;
+			y += gamePanel.tileSize;
+		}
 
 	}
 
