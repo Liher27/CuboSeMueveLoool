@@ -45,23 +45,24 @@ public class TileManager extends Tile {
 
 			HashMap<Integer, BufferedImage> ret = new HashMap<Integer, BufferedImage>();
 
-			ret.put(0, ImageIO.read(getClass().getResourceAsStream("/tiles/border.png")));
-			ret.put(1, ImageIO.read(getClass().getResourceAsStream("/tiles/flower.png")));
-			ret.put(2, ImageIO.read(getClass().getResourceAsStream("/tiles/frame.png")));
-			ret.put(3, ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png")));
-			ret.put(4, ImageIO.read(getClass().getResourceAsStream("/tiles/house.png")));
-			ret.put(5, ImageIO.read(getClass().getResourceAsStream("/tiles/water.png")));
-			ret.put(6, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorder.png")));
-			ret.put(7, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteFloor.png")));
+			ret.put(0, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderLeft.png")));
+			ret.put(1, ImageIO.read(getClass().getResourceAsStream("/tiles/border.png")));
+			ret.put(2, ImageIO.read(getClass().getResourceAsStream("/tiles/water.png")));
+			ret.put(3, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderRight.png")));
+			ret.put(4, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderUp.png")));
+			ret.put(5, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteWithGrass.png")));
+			ret.put(6, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteWithGrass.png")));
+			ret.put(7, ImageIO.read(getClass().getResourceAsStream("/tiles/pOakStill.png")));
 			ret.put(8, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteWithGrass.png")));
 			ret.put(9, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderUp.png")));
-			ret.put(10, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderDown.png")));
-			ret.put(11, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderLeft.png")));
+			ret.put(10, ImageIO.read(getClass().getResourceAsStream("/tiles/house.png")));
+			ret.put(11, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerRightUp.png")));
 			ret.put(12, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderRight.png")));
-			ret.put(13, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerLeftDown.png")));
-			ret.put(14, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerRightDown.png")));
-			ret.put(15, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerRightUp.png")));
-			ret.put(16, ImageIO.read(getClass().getResourceAsStream("/tiles/pOakStill.png")));
+			ret.put(13, ImageIO.read(getClass().getResourceAsStream("/tiles/pOakStill.png")));
+			ret.put(14, ImageIO.read(getClass().getResourceAsStream("/tiles/flower.png")));
+			ret.put(15, ImageIO.read(getClass().getResourceAsStream("/tiles/frame.png")));
+			ret.put(16, ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png")));
+			ret.put(17, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteFloor.png")));
 
 			return ret;
 
@@ -78,12 +79,12 @@ public class TileManager extends Tile {
 	private void loadMap() {
 
 		try {
-			InputStream inputStream = getClass().getResourceAsStream("/map/map.txt");
+			InputStream inputStream = getClass().getResourceAsStream("/map/worldMap.txt");
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
 			for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
 				String mapCoord = bufferedReader.readLine();
-				String[] mapInfo = mapCoord.split(" ");
+				String[] mapInfo = mapCoord.split(",");
 
 				for (int worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
 					int mapNumber = Integer.parseInt(mapInfo[worldColumn]);
