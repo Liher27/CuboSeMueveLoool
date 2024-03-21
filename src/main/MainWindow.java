@@ -22,7 +22,7 @@ public class MainWindow extends JFrame{
 		setResizable(false);
 		setTitle("Rojo se mueve (Ayuda)");
 		
-		GamePanel gamePanel;
+		GamePanel gamePanel = null;
 		try {
 			gamePanel = new GamePanel();
 			

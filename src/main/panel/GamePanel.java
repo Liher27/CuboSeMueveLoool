@@ -30,28 +30,26 @@ public class GamePanel extends JPanel implements Runnable {
 	// tamaño de escalada para los bloques de sprites, ya que un sprite de 16x16
 	// se vería demasiado pequeño en las pantallas de 1920x1080
 	private final int scale = 3;
-	private final int hi_scale = 4;
 	public final int tileSize = originalTileSize * scale;// tamaño escalado
-	public final int highTileSize = originalTileSize * hi_scale;
-	
+
 	// Resolución de la pantalla, 4:3 en este caso.
 	public final int maxScreenColumn = 16;
 	public final int maxScreenRow = 12;
 	public final int screenWidth = tileSize * maxScreenColumn; // Para que los 16 bloques ocupen en total 760 pixeles
 	public final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
-	
+
 	public final int maxWorldColumn = 48;
 	public final int maxWorldRow = 48;
-	public final int worldScreenWidth = tileSize * maxWorldColumn; 
-	public final int worldScreenHeight = tileSize * maxWorldRow; 
+	public final int worldScreenWidth = tileSize * maxWorldColumn;
+	public final int worldScreenHeight = tileSize * maxWorldRow;
 
-	
 	// Para delimitar el ratio de refresco de la pantalla
 	private final int FPS = 60;
 
 	/**
 	 * Constructor de la clase GamePanel
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public GamePanel() throws IOException {
 		keyBoard = new KeyBoard();

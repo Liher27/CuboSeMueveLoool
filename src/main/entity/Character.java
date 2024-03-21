@@ -2,7 +2,6 @@ package main.entity;
 
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
 /**
  * Pojo de los personajes del programa, para añadir mas personajes proximamente
  */

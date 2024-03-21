@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 import main.panel.GamePanel;
 
-public class TileManager {
+public class TileManager extends Tile {
 
 	Tile[] tile = null;
 	GamePanel gamePanel = null;
@@ -28,7 +28,8 @@ public class TileManager {
 	public TileManager(GamePanel gamePanel) throws IOException {
 
 		this.gamePanel = gamePanel;
-		mapCoords = new int[gamePanel.maxScreenColumn][gamePanel.maxScreenRow];
+//		mapCoords = new int[gamePanel.maxScreenColumn][gamePanel.maxScreenRow];
+		mapCoords = new int[gamePanel.maxWorldColumn][gamePanel.maxWorldRow];
 
 		tileImages = getTileImage();
 		loadMap();
@@ -77,16 +78,16 @@ public class TileManager {
 	private void loadMap() {
 
 		try {
-			InputStream inputStream = getClass().getResourceAsStream("/map/map2.txt");
+			InputStream inputStream = getClass().getResourceAsStream("/map/map.txt");
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-			for (int row = 0; row < gamePanel.maxScreenRow; row++) {
+			for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
 				String mapCoord = bufferedReader.readLine();
 				String[] mapInfo = mapCoord.split(" ");
 
-				for (int column = 0; column < gamePanel.maxScreenColumn; column++) {
-					int mapNumber = Integer.parseInt(mapInfo[column]);
-					mapCoords[column][row] = mapNumber;
+				for (int worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
+					int mapNumber = Integer.parseInt(mapInfo[worldColumn]);
+					mapCoords[worldColumn][worldRow] = mapNumber;
 				}
 			}
 			bufferedReader.close();
@@ -105,27 +106,37 @@ public class TileManager {
 	 */
 	public void drawTiles(Graphics2D graphics2D) {
 
-		int x = 0;
-		int y = 0;
-		int worldRow = 0;
-		int worldColumn = 0;
+		for (int worldRow = 0; worldRow < gamePanel.maxScreenRow; worldRow++) {
+			for (int worldColumn = 0; worldColumn < gamePanel.maxScreenColumn; worldColumn++) {
 
-		for (worldRow = 0; worldRow < gamePanel.maxScreenRow; worldRow++) {
-			for (worldColumn = 0; worldColumn < gamePanel.maxScreenColumn; worldColumn++) {
-
-//				int worldX = worldColumn * gamePanel.tileSize;
-//				int worldY = worldRow * gamePanel.tileSize;
-//				int screenX = worldX - (gamePanel.player.characterWorldX * gamePanel.player.playerPositionXInPanel);
-//				int screenY = worldY - (gamePanel.player.characterWorldY * gamePanel.player.playerPositionYInPanel);
+				int worldX = worldColumn * gamePanel.tileSize;
+				int worldY = worldRow * gamePanel.tileSize;
+				int screenX = worldX - gamePanel.player.characterWorldX + gamePanel.player.playerPositionXInPanel;
+				int screenY = worldY - gamePanel.player.playerPositionYInPanel + gamePanel.player.characterWorldY;
 
 				int tileImageIndex = mapCoords[worldColumn][worldRow];
-				graphics2D.drawImage(tileImages.get(tileImageIndex), x, y, gamePanel.tileSize, gamePanel.tileSize,
-						null);
-				x += gamePanel.tileSize;
+				graphics2D.drawImage(tileImages.get(tileImageIndex), screenX, screenY, gamePanel.tileSize,
+						gamePanel.tileSize, null);
+//				graphics2D.drawImage(pokemonSprite, 144, 144, gamePanel.tileSize, gamePanel.tileSize, null);
 			}
-			x = 0;
-			y += gamePanel.tileSize;
 		}
 	}
+
+//		int x = 0;
+//		int y = 0;
+//		int worldRow = 0;
+//		int worldColumn = 0;
+//
+//		for (worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
+//			for (worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
+//
+//				int tileImageIndex = mapCoords[worldColumn][worldRow];
+//				graphics2D.drawImage(tileImages.get(tileImageIndex), x, y, gamePanel.tileSize, gamePanel.tileSize,
+//						null);
+//				x += gamePanel.tileSize;
+//			}
+//			x = 0;
+//			y += gamePanel.tileSize;
+//		}
 
 }
