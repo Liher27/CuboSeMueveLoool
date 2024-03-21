@@ -1,6 +1,8 @@
 package main.entity;
 
 import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 /**
  * Pojo de los personajes del programa, para añadir mas personajes proximamente
  */
@@ -21,6 +23,9 @@ public abstract class Character {
 	public BufferedImage redStillUp = null;
 	public BufferedImage redMovesUp1 = null;
 	public BufferedImage redMovesUp2 = null;
+	public BufferedImage waterPokemon1 = null;
+	public BufferedImage waterPokemon2 = null;
+	
 	public String direction = null;
 	
 	public int spriteCounter = 0;

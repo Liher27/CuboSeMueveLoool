@@ -59,6 +59,9 @@ public class Player extends Character {
 			redStillUp = ImageIO.read(getClass().getResourceAsStream("/player/redStillUp.png"));
 			redMovesUp1 = ImageIO.read(getClass().getResourceAsStream("/player/redMovesUp1.png"));
 			redMovesUp2 = ImageIO.read(getClass().getResourceAsStream("/player/redMovesUp2.png"));
+			waterPokemon1 = ImageIO.read(getClass().getResourceAsStream("/player/waterPokemon1.png"));
+			waterPokemon2 = ImageIO.read(getClass().getResourceAsStream("/player/waterPokemon2.png"));
+			
 		} catch (IOException e) {
 			// No puede ocurrir...
 		}
@@ -124,55 +127,70 @@ public class Player extends Character {
 	public void draw(Graphics2D graphics2D) {
 
 		BufferedImage sprite = null;
+		BufferedImage pokemonSprite = null;
 
 		switch (direction) {
 		case "up":
 			if (spriteChanger == 1) {
 				sprite = redStillUp;
+				pokemonSprite = waterPokemon1;
 			}
 			if (spriteChanger == 2) {
 				sprite = redMovesUp1;
+				pokemonSprite = waterPokemon2;
 			}
 			if (spriteChanger == 3) {
 				sprite = redMovesUp2;
+				pokemonSprite = waterPokemon1;
 			}
 			break;
 		case "down":
 			if (spriteChanger == 1) {
 				sprite = redStill;
+				pokemonSprite = waterPokemon1;
 			}
 			if (spriteChanger == 2) {
 				sprite = redMovesDown1;
+				pokemonSprite = waterPokemon2;
 			}
 			if (spriteChanger == 3) {
 				sprite = redMovesDown2;
+				pokemonSprite = waterPokemon1;
 			}
 			break;
 		case "left":
 			if (spriteChanger == 1) {
 				sprite = redStillLeft;
+				pokemonSprite = waterPokemon1;
 			}
 			if (spriteChanger == 2) {
 				sprite = redMovesLeft;
+				pokemonSprite = waterPokemon2;
 			}
 			if (spriteChanger == 3) {
 				sprite = redMovesLeft;
+				pokemonSprite = waterPokemon1;
 			}
 			break;
 		case "right":
 			if (spriteChanger == 1) {
 				sprite = redStillRight;
+				pokemonSprite = waterPokemon1;
 			}
 			if (spriteChanger == 2) {
 				sprite = redMovesRight;
+				pokemonSprite = waterPokemon2;
 			}
 			if (spriteChanger == 3) {
 				sprite = redMovesRight;
+				pokemonSprite = waterPokemon1;
 			}
 			break;
 
 		}
 		graphics2D.drawImage(sprite, playerPositionXInPanel, playerPositionYInPanel, gamePanel.tileSize,
+				gamePanel.tileSize, null);
+		graphics2D.drawImage(pokemonSprite, 96 , 96, gamePanel.tileSize,
 				gamePanel.tileSize, null);
 	}
 }

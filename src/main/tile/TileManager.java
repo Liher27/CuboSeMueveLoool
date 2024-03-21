@@ -53,6 +53,14 @@ public class TileManager {
 			ret.put(6, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorder.png")));
 			ret.put(7, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteFloor.png")));
 			ret.put(8, ImageIO.read(getClass().getResourceAsStream("/tiles/whiteWithGrass.png")));
+			ret.put(9, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderUp.png")));
+			ret.put(10, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderDown.png")));
+			ret.put(11, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderLeft.png")));
+			ret.put(12, ImageIO.read(getClass().getResourceAsStream("/tiles/waterBorderRight.png")));
+			ret.put(13, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerLeftDown.png")));
+			ret.put(14, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerRightDown.png")));
+			ret.put(15, ImageIO.read(getClass().getResourceAsStream("/tiles/waterCornerRightUp.png")));
+			ret.put(16, ImageIO.read(getClass().getResourceAsStream("/tiles/pOakStill.png")));
 
 			return ret;
 
