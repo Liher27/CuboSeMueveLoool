@@ -111,13 +111,12 @@ public class TileManager extends Tile {
 
 				int worldX = worldColumn * gamePanel.tileSize;
 				int worldY = worldRow * gamePanel.tileSize;
-				int screenX = worldX - gamePanel.player.characterWorldX + gamePanel.player.playerPositionXInPanel;
-				int screenY = worldY - gamePanel.player.playerPositionYInPanel + gamePanel.player.characterWorldY;
+				int screenX = worldX -gamePanel.player.characterWorldX  + gamePanel.player.playerPositionXInPanel ;
+				int screenY = worldY - gamePanel.player.characterWorldY + gamePanel.player.playerPositionYInPanel ;
 
 				int tileImageIndex = mapCoords[worldColumn][worldRow];
 				graphics2D.drawImage(tileImages.get(tileImageIndex), screenX, screenY, gamePanel.tileSize,
 						gamePanel.tileSize, null);
-//				graphics2D.drawImage(pokemonSprite, 144, 144, gamePanel.tileSize, gamePanel.tileSize, null);
 			}
 		}
 	}

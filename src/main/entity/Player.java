@@ -35,8 +35,8 @@ public class Player extends Character {
 		characterWorldX = gamePanel.tileSize * 10;
 		characterWorldY = gamePanel.tileSize * 9;
 
-		playerPositionXInPanel = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; //360
-		playerPositionYInPanel = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2; //264
+		playerPositionXInPanel = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // 360
+		playerPositionYInPanel = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2; // 264
 
 		speed = 4;
 		direction = "down";
@@ -74,12 +74,12 @@ public class Player extends Character {
 
 		if (keyBoard.upPressed == true) {
 			direction = "up";
-			characterWorldY += speed;
+			characterWorldY -= speed;
 		}
 
 		else if (keyBoard.downPressed == true) {
 			direction = "down";
-			characterWorldY -= speed;
+			characterWorldY += speed;
 		}
 
 		else if (keyBoard.rightPressed == true) {
@@ -131,77 +131,77 @@ public class Player extends Character {
 	public void draw(Graphics2D graphics2D) {
 
 		BufferedImage sprite = null;
-		BufferedImage pokemonSprite = null;
+//		BufferedImage pokemonSprite = null;
 
 		if (direction == null) {
 			if (spriteChanger == 1) {
 				sprite = redStill;
-				pokemonSprite = waterPokemon1;
+//				pokemonSprite = waterPokemon1;
 			}
 			if (spriteChanger == 2) {
 				sprite = redStill;
-				pokemonSprite = waterPokemon2;
+//				pokemonSprite = waterPokemon2;
 			}
 			if (spriteChanger == 3) {
 				sprite = redStill;
-				pokemonSprite = waterPokemon2;
+//				pokemonSprite = waterPokemon2;
 			}
 		} else {
 			switch (direction) {
 			case "up":
 				if (spriteChanger == 1) {
 					sprite = redStillUp;
-					pokemonSprite = waterPokemon1;
+//					pokemonSprite = waterPokemon1;
 				}
 				if (spriteChanger == 2) {
 					sprite = redMovesUp1;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				if (spriteChanger == 3) {
 					sprite = redMovesUp2;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				break;
 			case "down":
 				if (spriteChanger == 1) {
 					sprite = redStill;
-					pokemonSprite = waterPokemon1;
+//					pokemonSprite = waterPokemon1;
 				}
 				if (spriteChanger == 2) {
 					sprite = redMovesDown1;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				if (spriteChanger == 3) {
 					sprite = redMovesDown2;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				break;
 			case "left":
 				if (spriteChanger == 1) {
 					sprite = redStillLeft;
-					pokemonSprite = waterPokemon1;
+//					pokemonSprite = waterPokemon1;
 				}
 				if (spriteChanger == 2) {
 					sprite = redMovesLeft;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				if (spriteChanger == 3) {
 					sprite = redMovesLeft;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				break;
 			case "right":
 				if (spriteChanger == 1) {
 					sprite = redStillRight;
-					pokemonSprite = waterPokemon1;
+//					pokemonSprite = waterPokemon1;
 				}
 				if (spriteChanger == 2) {
 					sprite = redMovesRight;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				if (spriteChanger == 3) {
 					sprite = redMovesRight;
-					pokemonSprite = waterPokemon2;
+//					pokemonSprite = waterPokemon2;
 				}
 				break;
 
@@ -210,7 +210,6 @@ public class Player extends Character {
 
 		graphics2D.drawImage(sprite, playerPositionXInPanel, playerPositionYInPanel, gamePanel.tileSize,
 				gamePanel.tileSize, null);
-		
-		
+//		graphics2D.drawImage(pokemonSprite, 144, 144, gamePanel.tileSize, gamePanel.tileSize, null);
 	}
 }
