@@ -74,12 +74,12 @@ public class Player extends Character {
 
 		if (keyBoard.upPressed == true) {
 			direction = "up";
-			characterWorldY -= speed;
+			characterWorldY += speed;
 		}
 
 		else if (keyBoard.downPressed == true) {
 			direction = "down";
-			characterWorldY += speed;
+			characterWorldY -= speed;
 		}
 
 		else if (keyBoard.rightPressed == true) {

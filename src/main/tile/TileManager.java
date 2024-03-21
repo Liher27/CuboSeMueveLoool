@@ -106,8 +106,8 @@ public class TileManager extends Tile {
 	 */
 	public void drawTiles(Graphics2D graphics2D) {
 
-		for (int worldRow = 0; worldRow < gamePanel.maxScreenRow; worldRow++) {
-			for (int worldColumn = 0; worldColumn < gamePanel.maxScreenColumn; worldColumn++) {
+		for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
+			for (int worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
 
 				int worldX = worldColumn * gamePanel.tileSize;
 				int worldY = worldRow * gamePanel.tileSize;
@@ -121,22 +121,5 @@ public class TileManager extends Tile {
 			}
 		}
 	}
-
-//		int x = 0;
-//		int y = 0;
-//		int worldRow = 0;
-//		int worldColumn = 0;
-//
-//		for (worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
-//			for (worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
-//
-//				int tileImageIndex = mapCoords[worldColumn][worldRow];
-//				graphics2D.drawImage(tileImages.get(tileImageIndex), x, y, gamePanel.tileSize, gamePanel.tileSize,
-//						null);
-//				x += gamePanel.tileSize;
-//			}
-//			x = 0;
-//			y += gamePanel.tileSize;
-//		}
 
 }

@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
 
 	public final int maxWorldColumn = 48;
-	public final int maxWorldRow = 48;
+	public final int maxWorldRow = 46;
 	public final int worldScreenWidth = tileSize * maxWorldColumn;
 	public final int worldScreenHeight = tileSize * maxWorldRow;
 
