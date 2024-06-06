@@ -8,9 +8,10 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import main.entity.Player;
-import main.keyBoard.KeyBoard;
-import main.tile.TileManager;
+import main.logic.CollisionDetector;
+import main.logic.KeyBoard;
+import main.manager.PlayerManager;
+import main.manager.TileManager;
 
 /**
  * Clase en la que se crea el panel
@@ -19,10 +20,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private KeyBoard keyBoard = null;
-	private Thread gameThread = null; // Hilo sobre el cual se correra el juego
-	public Player player = null;
-	private TileManager tileManager = null;
+	public KeyBoard keyBoard = null;
+	private Thread gameThread = null; // Hilo sobre el cual correra el juego
+	public PlayerManager player = null;
+	public TileManager tileManager = null;
+	public CollisionDetector collisionDetector = null;
 
 	// definir un sprite de 16x16 bloques
 	private final int originalTileSize = 16;
@@ -38,8 +40,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int screenWidth = tileSize * maxScreenColumn; // Para que los 16 bloques ocupen en total 760 pixeles
 	public final int screenHeight = tileSize * maxScreenRow; // Para que los 12 bloques originales ocupen 576 pixeles
 
-	public final int maxWorldColumn = 48;
-	public final int maxWorldRow = 46;
+	public final int maxWorldColumn = 50;
+	public final int maxWorldRow = 50;
 	public final int worldScreenWidth = tileSize * maxWorldColumn;
 	public final int worldScreenHeight = tileSize * maxWorldRow;
 
@@ -53,8 +55,9 @@ public class GamePanel extends JPanel implements Runnable {
 	 */
 	public GamePanel() throws IOException {
 		keyBoard = new KeyBoard();
-		player = new Player(keyBoard, this);
+		player = new PlayerManager(keyBoard, this);
 		tileManager = new TileManager(this);
+		collisionDetector = new CollisionDetector(this);
 
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.white);

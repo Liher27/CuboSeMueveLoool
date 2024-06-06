@@ -1,4 +1,4 @@
-package main.keyBoard;
+package main.logic;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
