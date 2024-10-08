@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.logic.KeyBoard;
+import main.manager.pojos.Character;
 import main.panel.GamePanel;
 
 public class PlayerManager extends Character {
@@ -30,8 +31,8 @@ public class PlayerManager extends Character {
 
 		this.gamePanel = gamePanel;
 
-		characterWorldX = gamePanel.tileSize * 10;
-		characterWorldY = gamePanel.tileSize * 9;
+		entityWorldX = gamePanel.tileSize * 10;
+		entityWorldY = gamePanel.tileSize * 9;
 
 		playerPositionXInPanel = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // 360
 		playerPositionYInPanel = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2; // 264
@@ -97,24 +98,24 @@ public class PlayerManager extends Character {
 		// Para comprobar si nuestro personaje ha chocado contra una pared o no, le
 		// pasamos el Player, que es una clase hija de Character, por lo que en el
 		// metodo podra operar con el player
-		characterCollisioned = false;
+		collisioned = false;
 		gamePanel.collisionDetector.checkHitBox(this);
 
 		// Hacemos que solo se pueda mover si el personaje no ha colisionado
 		if (direction != null) {
-			if (characterCollisioned == false) {
+			if (collisioned == false) {
 				switch (direction) {
 				case "up":
-					characterWorldY -= speed;
+					entityWorldY -= speed;
 					break;
 				case "down":
-					characterWorldY += speed;
+					entityWorldY += speed;
 					break;
 				case "left":
-					characterWorldX -= speed;
+					entityWorldX -= speed;
 					break;
 				case "right":
-					characterWorldX += speed;
+					entityWorldX += speed;
 					break;
 				}
 			}

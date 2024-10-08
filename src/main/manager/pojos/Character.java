@@ -1,4 +1,4 @@
-package main.manager;
+package main.manager.pojos;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -6,10 +6,7 @@ import java.awt.image.BufferedImage;
 /**
  * Pojo de los personajes del programa, para añadir mas personajes proximamente
  */
-public abstract class Character {
-
-	public int characterWorldX = 0;
-	public int characterWorldY = 0;
+public class Character extends OverMapEntities {
 
 	public int speed = 0;
 
@@ -36,24 +33,6 @@ public abstract class Character {
 	// el sprite del mismo, para poder ser un poco mas permisivos a la hora de
 	// chocar contra algun objeto
 	public Rectangle characterHitBox = new Rectangle(8, 16, 32, 32);
-
-	public boolean characterCollisioned = false;
-
-	public int getCharacterWorldX() {
-		return characterWorldX;
-	}
-
-	public void setCharacterWorldX(int characterWorldX) {
-		this.characterWorldX = characterWorldX;
-	}
-
-	public int getCharacterWorldY() {
-		return characterWorldY;
-	}
-
-	public void setCharacterWorldY(int characterWorldY) {
-		this.characterWorldY = characterWorldY;
-	}
 
 	public int getSpeed() {
 		return speed;
@@ -191,11 +170,4 @@ public abstract class Character {
 		this.characterHitBox = characterHitbox;
 	}
 
-	public boolean isCharacterCollisioned() {
-		return characterCollisioned;
-	}
-
-	public void setCharacterCollisioned(boolean characterCollisioned) {
-		this.characterCollisioned = characterCollisioned;
-	}
 }

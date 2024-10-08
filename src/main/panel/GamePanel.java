@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 
 import main.logic.CollisionDetector;
 import main.logic.KeyBoard;
+import main.manager.ItemManager;
 import main.manager.PlayerManager;
 import main.manager.TileManager;
+import main.manager.pojos.OverMapEntities;
 
 /**
  * Clase en la que se crea el panel
@@ -25,7 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public PlayerManager player = null;
 	public TileManager tileManager = null;
 	public CollisionDetector collisionDetector = null;
-
+	public OverMapEntities objects[] = new OverMapEntities[10];
+	public ItemManager itemSetter = new ItemManager(this);
 	// definir un sprite de 16x16 bloques
 	private final int originalTileSize = 16;
 
@@ -66,6 +69,14 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		startGameThread();
+	}
+
+	public void setItemsInOverMap() throws IOException {
+		try {
+			itemSetter.setItems();
+		} catch (IOException e) {
+			throw e;
+		}
 	}
 
 	/**
