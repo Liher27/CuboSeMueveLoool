@@ -1,11 +1,9 @@
-package main;
+package main.panel;
 
 import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import main.panel.GamePanel;
 
 /**
  * Clase para crear el frame y añadirle el Panel

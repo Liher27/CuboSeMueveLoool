@@ -1,5 +1,6 @@
 package main;
 
+import main.panel.MainWindow;
 
 /**
  * Clase principal sobre la cual se ejecuta el frame con el GamePanel
