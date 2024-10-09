@@ -5,7 +5,7 @@ Programa para comprobar como funcionan los cambios de sprites y el movimiento de
 1. Para ejecutar el programa sin necesidad de exportar el codigo y requerir de eclipse, tendremos que descargarnos el archivo en el apartado de "releases"
 2. Tras haberlo descargado, iremos a la terminal de nuestro equipo, y ejecutaremos el siguiente comando:
 ```bash
-(en la ruta en la que se encuentre el archivo) java -jar nombre-del-archivo.jar
+(en la ruta en la que se encuentre el archivo) java -jar CuboSeMueveLoool.jar
 ```
 3. El programa se ejecutara y podras utilizarlo sin preocupación.
 
