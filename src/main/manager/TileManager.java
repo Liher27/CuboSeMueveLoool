@@ -5,8 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -48,8 +46,8 @@ public class TileManager extends Tile {
 	 */
 	private HashMap<Integer, Tile> loadTileImages() throws IOException {
 		HashMap<Integer, Tile> ret = new HashMap<>();
-		InputStream inputStream = getClass().getResourceAsStream("/map/tileInfo.csv");
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+		File tilesInfoFile = new File("src/sprites/map/tileInfo.csv");
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(tilesInfoFile));
 		String line = null;
 		while ((line = bufferedReader.readLine()) != null) {
 			String[] values = line.split(",");
@@ -57,7 +55,7 @@ public class TileManager extends Tile {
 			String tileName = values[1];
 			String tileCollission = values[2];
 			Tile tile = new Tile();
-			tile.image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + tileName + ".png"));
+			tile.image = ImageIO.read(getClass().getResourceAsStream("/sprites/tiles/" + tileName + ".png"));
 			tile.collision = Boolean.parseBoolean(tileCollission);
 			ret.put(Integer.parseInt(tileIndex), tile);
 		}
@@ -70,21 +68,23 @@ public class TileManager extends Tile {
 	 * Método usado para leer el fichero de texto del mapa, en el que cada numero es
 	 * un bloque del array tipo tile. lee columna a columna, y una vez llega al
 	 * final de la columna pasa a la siguiente fila...
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	private void loadMap() throws IOException {
-		InputStream inputStream = getClass().getResourceAsStream("/map/worldMap.csv");
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+		File map = new File("src/sprites/map/worldMap.csv");
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(map));
 
-			for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
-				String mapCoord = bufferedReader.readLine();
-				String[] mapInfo = mapCoord.split(",");
+		for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
+			String mapCoord = bufferedReader.readLine();
+			String[] mapInfo = mapCoord.split(",");
 
-				for (int worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
-					int mapNumber = Integer.parseInt(mapInfo[worldColumn]);
-					mapCoords[worldColumn][worldRow] = mapNumber;
-				}
+			for (int worldColumn = 0; worldColumn < gamePanel.maxWorldColumn; worldColumn++) {
+				int mapNumber = Integer.parseInt(mapInfo[worldColumn]);
+				mapCoords[worldColumn][worldRow] = mapNumber;
 			}
+		}
+		bufferedReader.close();
 
 	}
 

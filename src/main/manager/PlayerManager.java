@@ -58,18 +58,18 @@ public class PlayerManager extends Character {
 	 */
 	public void getPlayerImage() throws IOException {
 		try {
-			redStill = ImageIO.read(getClass().getResourceAsStream("/player/redStill.png"));
-			redMovesDown1 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves1.png"));
-			redMovesDown2 = ImageIO.read(getClass().getResourceAsStream("/player/redMoves2.png"));
-			redStillLeft = ImageIO.read(getClass().getResourceAsStream("/player/redStillLeft.png"));
-			redMovesLeft = ImageIO.read(getClass().getResourceAsStream("/player/redMovesLeft.png"));
-			redStillRight = ImageIO.read(getClass().getResourceAsStream("/player/redStillRight.png"));
-			redMovesRight = ImageIO.read(getClass().getResourceAsStream("/player/redMovesRight.png"));
-			redStillUp = ImageIO.read(getClass().getResourceAsStream("/player/redStillUp.png"));
-			redMovesUp1 = ImageIO.read(getClass().getResourceAsStream("/player/redMovesUp1.png"));
-			redMovesUp2 = ImageIO.read(getClass().getResourceAsStream("/player/redMovesUp2.png"));
-			waterPokemon1 = ImageIO.read(getClass().getResourceAsStream("/player/waterPokemon1.png"));
-			waterPokemon2 = ImageIO.read(getClass().getResourceAsStream("/player/waterPokemon2.png"));
+			redStill = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redStill.png"));
+			redMovesDown1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redMoves1.png"));
+			redMovesDown2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redMoves2.png"));
+			redStillLeft = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redStillLeft.png"));
+			redMovesLeft = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redMovesLeft.png"));
+			redStillRight = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redStillRight.png"));
+			redMovesRight = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redMovesRight.png"));
+			redStillUp = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redStillUp.png"));
+			redMovesUp1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redMovesUp1.png"));
+			redMovesUp2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/redMovesUp2.png"));
+			waterPokemon1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/waterPokemon1.png"));
+			waterPokemon2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/waterPokemon2.png"));
 
 		} catch (IOException e) {
 			throw e;
