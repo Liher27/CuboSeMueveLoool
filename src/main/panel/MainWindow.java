@@ -31,6 +31,7 @@ public class MainWindow extends JFrame{
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "No se han cargado los archivos correctamente", "Error",
 					JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
 		
 	}

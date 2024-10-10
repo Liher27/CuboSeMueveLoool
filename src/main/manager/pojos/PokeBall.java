@@ -10,7 +10,7 @@ public class PokeBall extends Item {
 		itemName = "PokeBall";
 
 		try {
-			itemSprite = ImageIO.read(getClass().getResourceAsStream("/items/PokeBall.png"));
+			itemSprite = ImageIO.read(getClass().getResourceAsStream("/sprites/items/PokeBall.png"));
 		} catch (IOException e) {
 			throw e;
 		}

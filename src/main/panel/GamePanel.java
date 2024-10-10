@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.logic.CollisionDetector;
@@ -68,15 +69,12 @@ public class GamePanel extends JPanel implements Runnable {
 		this.addKeyListener(keyBoard);
 		this.setFocusable(true);
 		this.requestFocusInWindow();
+		setItemsInOverMap();
 		startGameThread();
 	}
 
 	public void setItemsInOverMap() throws IOException {
-		try {
 			itemSetter.setItems();
-		} catch (IOException e) {
-			throw e;
-		}
 	}
 
 	/**
@@ -129,7 +127,9 @@ public class GamePanel extends JPanel implements Runnable {
 			nextDrawTime = nextDrawTime + drawInterval;
 
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ha habido un error en la ejecucion del codigo", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
 	}
 
