@@ -10,4 +10,4 @@ Programa para comprobar como funcionan los cambios de sprites y el movimiento de
 3. El programa se ejecutara y podras utilizarlo sin preocupación.
 
 ## Controles
-El personaje se controla tanto con W,A,S,D, y con las flechas direccionales.
+El personaje se controla tanto con W,A,S,D, como con las flechas direccionales.
