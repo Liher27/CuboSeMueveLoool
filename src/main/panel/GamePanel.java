@@ -69,12 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
 		this.addKeyListener(keyBoard);
 		this.setFocusable(true);
 		this.requestFocusInWindow();
-		setItemsInOverMap();
 		startGameThread();
-	}
-
-	public void setItemsInOverMap() throws IOException {
-			itemSetter.setItems();
 	}
 
 	/**
