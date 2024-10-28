@@ -1,0 +1,6 @@
+[submodule "src/fights"]
+	path = src/fights
+	url = https://github.com/Liher27/CuboSeMueveLoool
+[submodule "fights"]
+	path = fights
+	url = https://github.com/Liher27/CuboSeMueveLoool
