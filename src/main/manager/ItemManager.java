@@ -3,13 +3,13 @@ package main.manager;
 import java.io.IOException;
 
 import main.manager.pojos.Pokedex;
-import main.panel.GamePanel;
+import main.panel.MainPanel;
 
 public class ItemManager {
 
-	GamePanel gamePanel = null;
+	MainPanel gamePanel = null;
 
-	public ItemManager(GamePanel gamePanel) {
+	public ItemManager(MainPanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 

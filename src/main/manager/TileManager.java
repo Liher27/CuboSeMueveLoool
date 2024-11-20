@@ -10,11 +10,11 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import main.manager.pojos.Tile;
-import main.panel.GamePanel;
+import main.panel.MainPanel;
 
 public class TileManager extends Tile {
 
-	private GamePanel gamePanel;
+	private MainPanel gamePanel;
 	public int[][] mapCoords;
 	public HashMap<Integer, Tile> tileImagesMap;
 
@@ -24,7 +24,7 @@ public class TileManager extends Tile {
 	 * @param gamePanel
 	 * @throws IOException
 	 */
-	public TileManager(GamePanel gamePanel) throws IOException {
+	public TileManager(MainPanel gamePanel) throws IOException {
 		this.gamePanel = gamePanel;
 		this.mapCoords = new int[gamePanel.maxWorldColumn][gamePanel.maxWorldRow];
 		this.tileImagesMap = loadTileImages();
@@ -54,9 +54,11 @@ public class TileManager extends Tile {
 			String tileIndex = values[0];
 			String tileName = values[1];
 			String tileCollission = values[2];
+			String tileGrass = values[3];
 			Tile tile = new Tile();
 			tile.image = ImageIO.read(getClass().getResourceAsStream("/sprites/tiles/" + tileName + ".png"));
 			tile.collision = Boolean.parseBoolean(tileCollission);
+			tile.grass = Boolean.parseBoolean(tileGrass);
 			ret.put(Integer.parseInt(tileIndex), tile);
 		}
 		bufferedReader.close();

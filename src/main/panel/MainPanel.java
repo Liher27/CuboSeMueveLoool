@@ -19,7 +19,7 @@ import main.manager.pojos.OverMapEntities;
 /**
  * Clase en la que se crea el panel
  */
-public class GamePanel extends JPanel implements Runnable {
+public class MainPanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 	 * 
 	 * @throws IOException
 	 */
-	public GamePanel() throws IOException {
+	public MainPanel() throws IOException {
 		keyBoard = new KeyBoard();
 		player = new PlayerManager(keyBoard, this);
 		tileManager = new TileManager(this);

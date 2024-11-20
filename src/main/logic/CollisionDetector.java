@@ -1,21 +1,22 @@
 package main.logic;
 
+import java.util.Random;
+
 import main.manager.pojos.Character;
-import main.panel.GamePanel;
+import main.panel.MainPanel;
 
 public class CollisionDetector {
 
-	GamePanel gamePanel = null;
+	MainPanel gamePanel = null;
 
-	public CollisionDetector(GamePanel gamePanel) {
+	public CollisionDetector(MainPanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 
 	public void checkHitBox(Character character) {
 		// Definimos las distancias de los lados del rectangulo de nuestra hitbox (al
 		// ser el sprite(CharacterWorldX/Y) mayor que nuestra hitbox(charcterHitBox),
-		// tenemos que hacer
-		// unos calculos).
+		// tenemos que hacer unos calculos).
 
 		int hitBoxLeftSideXCoord = character.entityWorldX + character.getCharacterHitbox().x;
 		int hitBoxRightSideXCoord = character.entityWorldX + character.getCharacterHitbox().x
@@ -51,6 +52,10 @@ public class CollisionDetector {
 						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).collision == true) {
 					character.collisioned = true;
 				}
+				if (gamePanel.tileManager.tileImagesMap.get(tileNum1).grass == true
+						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).grass == true) {
+					pokemonAppear();
+				}
 				break;
 			case "down":
 				characterBottomRow = (hitBoxBottomSideYCoord + character.speed) / gamePanel.tileSize;
@@ -59,6 +64,10 @@ public class CollisionDetector {
 				if (gamePanel.tileManager.tileImagesMap.get(tileNum1).collision == true
 						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).collision == true) {
 					character.collisioned = true;
+				}
+				if (gamePanel.tileManager.tileImagesMap.get(tileNum1).grass == true
+						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).grass == true) {
+					pokemonAppear();
 				}
 				break;
 			case "left":
@@ -69,6 +78,10 @@ public class CollisionDetector {
 						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).collision == true) {
 					character.collisioned = true;
 				}
+				if (gamePanel.tileManager.tileImagesMap.get(tileNum1).grass == true
+						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).grass == true) {
+					pokemonAppear();
+				}
 				break;
 			case "right":
 				characterRightCol = (hitBoxRightSideXCoord + character.speed) / gamePanel.tileSize;
@@ -78,8 +91,20 @@ public class CollisionDetector {
 						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).collision == true) {
 					character.collisioned = true;
 				}
+				if (gamePanel.tileManager.tileImagesMap.get(tileNum1).grass == true
+						|| gamePanel.tileManager.tileImagesMap.get(tileNum2).grass == true) {
+					pokemonAppear();
+				}
 				break;
 			}
+		}
+	}
+
+	private void pokemonAppear() {
+		int probability = 2;
+		int encounterRatio = new Random().nextInt(187);
+		if (probability > encounterRatio) {
+			//Aqui irá la logica del combate cuando se encuentre con un pokemon
 		}
 	}
 

@@ -9,13 +9,13 @@ import javax.imageio.ImageIO;
 
 import main.logic.KeyBoard;
 import main.manager.pojos.Character;
-import main.panel.GamePanel;
+import main.panel.MainPanel;
 
 public class PlayerManager extends Character {
 
 	private KeyBoard keyBoard = null;
 
-	private GamePanel gamePanel = null;
+	private MainPanel gamePanel = null;
 
 	public final int playerPositionXInPanel;
 	public final int playerPositionYInPanel;
@@ -26,7 +26,7 @@ public class PlayerManager extends Character {
 	 * @param keyBoard
 	 * @throws IOException
 	 */
-	public PlayerManager(KeyBoard keyBoard, GamePanel gamePanel) throws IOException {
+	public PlayerManager(KeyBoard keyBoard, MainPanel gamePanel) throws IOException {
 		this.keyBoard = keyBoard;
 
 		this.gamePanel = gamePanel;

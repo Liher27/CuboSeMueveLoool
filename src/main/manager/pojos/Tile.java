@@ -7,6 +7,15 @@ public class Tile {
 	public int index = 0;
 	public BufferedImage image = null;
 	public boolean collision = false;
+	public boolean grass = false;
+
+	public boolean isGrass() {
+		return grass;
+	}
+
+	public void setGrass(boolean grass) {
+		this.grass = grass;
+	}
 
 	public int getIndex() {
 		return index;

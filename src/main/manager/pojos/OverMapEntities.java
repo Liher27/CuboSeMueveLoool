@@ -2,7 +2,7 @@ package main.manager.pojos;
 
 public class OverMapEntities {
 
-	public int entityWorldX = 0;
+	public int entityWorldX = 1;
 	public int entityWorldY = 0;
 
 	public boolean collisioned = false;
