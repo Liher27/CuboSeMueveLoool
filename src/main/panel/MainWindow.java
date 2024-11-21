@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import pokemonFight.manager.StatusSingleton;
 import pokemonFight.view.FightPanel;
 
 /**
@@ -15,6 +16,8 @@ import pokemonFight.view.FightPanel;
 public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	FightPanel fightPanel = null;
+	MainPanel mainPanel = null;
 
 	/**
 	 * constructor
@@ -23,38 +26,49 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setTitle("Rojo se mueve (Ayuda)");
+		setMainPanel();
+		pack();
 
+		setLocationRelativeTo(null);
+
+		StatusSingleton.getInstance().setMainWindow(this);
+	}
+
+	public void setMainPanel() {
 		try {
-			MainPanel gamePanel = new MainPanel();
-
-			
-			
-//			FightPanel fightPanel = new FightPanel();
-
-			add(gamePanel);
-//			add(fightPanel);
-			
-			addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosing(WindowEvent e) {
-//					fightPanel.stopBattle();
-					System.exit(0);
-				}
-			});
-			
-			pack();
-
-			setLocationRelativeTo(null);
-			
-//			fightPanel.setVisible(false);
-			
+			mainPanel = new MainPanel();
+			if (null != fightPanel) {
+				fightPanel.setVisible(false);
+			}
+			add(mainPanel);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "No se han cargado los archivos correctamente", "Error",
+			JOptionPane.showMessageDialog(null, "No se ha podido cargar el panel de aventura correctamente", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(0);
 		}
+	}
 
+	public void setFightPanel() {
+		try {
+			fightPanel = new FightPanel();
+			add(fightPanel);
+
+			mainPanel.setVisible(false);
+
+			addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					fightPanel.stopBattle();
+					System.exit(0);
+				}
+			});
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "No se ha podido cargar el panel de combate", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			System.exit(0);
+		}
 	}
 
 }

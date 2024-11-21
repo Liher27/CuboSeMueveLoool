@@ -4,6 +4,8 @@ import java.util.Random;
 
 import main.manager.pojos.Character;
 import main.panel.MainPanel;
+import main.panel.MainWindow;
+import pokemonFight.manager.StatusSingleton;
 
 public class CollisionDetector {
 
@@ -104,7 +106,8 @@ public class CollisionDetector {
 		int probability = 2;
 		int encounterRatio = new Random().nextInt(187);
 		if (probability > encounterRatio) {
-			//Aqui irá la logica del combate cuando se encuentre con un pokemon
+			StatusSingleton.getInstance().getMainWindow().setFightPanel();
+			// Aqui irá la logica del combate cuando se encuentre con un pokemon
 		}
 	}
 

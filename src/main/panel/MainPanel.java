@@ -5,7 +5,12 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -15,6 +20,9 @@ import main.manager.ItemManager;
 import main.manager.PlayerManager;
 import main.manager.TileManager;
 import main.manager.pojos.OverMapEntities;
+import pokemonFight.manager.PokemonManager;
+import pokemonFight.manager.StatusSingleton;
+import pokemonFight.manager.pojo.Pokemon;
 
 /**
  * Clase en la que se crea el panel
@@ -30,6 +38,7 @@ public class MainPanel extends JPanel implements Runnable {
 	public CollisionDetector collisionDetector = null;
 	public OverMapEntities objects[] = new OverMapEntities[10];
 	public ItemManager itemSetter = new ItemManager(this);
+	private List<Pokemon> allyPokemonTeam = null;
 	// definir un sprite de 16x16 bloques
 	private final int originalTileSize = 16;
 
@@ -62,13 +71,16 @@ public class MainPanel extends JPanel implements Runnable {
 		player = new PlayerManager(keyBoard, this);
 		tileManager = new TileManager(this);
 		collisionDetector = new CollisionDetector(this);
+		allyPokemonTeam = selectTeamPokemons("Escoge los pokemon para tu equipo");
+		StatusSingleton.getInstance().setPokemonTeam(allyPokemonTeam);
 
-		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setPreferredSize(new Dimension(800, 600));
 		this.setBackground(Color.white);
 		this.setDoubleBuffered(true); // opcional, es para un mejor renderizado de los graficos del panel
 		this.addKeyListener(keyBoard);
 		this.setFocusable(true);
 		this.requestFocusInWindow();
+
 		startGameThread();
 	}
 
@@ -147,5 +159,54 @@ public class MainPanel extends JPanel implements Runnable {
 		tileManager.drawTiles(graphics2D);
 		player.draw(graphics2D);
 		graphics2D.dispose();
+	}
+
+	/**
+	 * metodo inicial para seleccionar los pokemon
+	 * 
+	 * @param message
+	 * @return equipo inicial para el combate
+	 * @throws IOException
+	 */
+	public List<Pokemon> selectTeamPokemons(String message) throws IOException {
+		JOptionPane.showMessageDialog(null, message, "Bienvenido!!", JOptionPane.INFORMATION_MESSAGE);
+		List<Pokemon> selectablePokemon = new PokemonManager().getPokemons();
+		String selectablePokemonNames = null;
+
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("Selecciona un Pokémon:"));
+
+		DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<String>();
+		for (int i = 0; i < selectablePokemon.size(); i++) {
+			selectablePokemonNames = selectablePokemon.get(i).getPokemonName();
+			comboBoxModel.addElement(selectablePokemonNames);
+		}
+
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setModel(comboBoxModel);
+		panel.add(comboBox);
+
+		List<Pokemon> selectedPokemons = new ArrayList<>();
+
+		for (int i = 0; i < 6; i++) {
+			int result = JOptionPane.showConfirmDialog(null, panel, "Seleccionar Pokémon",
+					JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == 0) {
+				int selectedIndex = comboBox.getSelectedIndex();
+				if (selectedIndex != -1) {
+					Pokemon cloningPokemon = selectablePokemon.get(selectedIndex);
+					selectedPokemons.add(new Pokemon(cloningPokemon.getPokemonLvl(), cloningPokemon.getPokemonHP(),
+							cloningPokemon.getPokemonSpeed(), cloningPokemon.getPokemonDefense(),
+							cloningPokemon.getPokemonAttackStat(), cloningPokemon.getPokemonName(),
+							cloningPokemon.getPokemonAttack1(), cloningPokemon.getPokemonAttack2(),
+							cloningPokemon.getPokemonAttack3(), cloningPokemon.getPokemonAttack4(),
+							cloningPokemon.getPokemonFront(), cloningPokemon.getPokemonBack()));
+				}
+			} else {
+				break;
+			}
+		}
+		return selectedPokemons;
 	}
 }
